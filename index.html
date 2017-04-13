@@ -38,6 +38,11 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <!-- Station Names -->
+                <li class="sidebar-brand">
+                    <a href="#">
+                       City
+                    </a>
+                </li>
                 <li>
                     <a href="#">Chennai</a>
                 </li>
@@ -74,28 +79,19 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
+        <div class="container-fluid">
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#"><h3>Station Name</h3></a>
+                        
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#"><span>Volume</span></a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#"><span>Next</span></a>
                     </li>
                 </ul>
             </div>
@@ -106,18 +102,9 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/radio.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
 
 </body>
 
