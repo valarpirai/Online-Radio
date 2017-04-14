@@ -8,6 +8,10 @@
     overflow-x: hidden;
  }
 
+ a {
+    cursor: pointer;
+ }
+
 /* Toggle Styles */
 
 #wrapper {
@@ -16,6 +20,12 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+}
+
+#wrapper > div {
+    height: calc(100vh - 76px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #wrapper.toggled {
@@ -74,6 +84,7 @@
     color: #999999;
 }
 
+.sidebar-nav li a.active,
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
@@ -263,4 +274,16 @@
     background-color: rgb(54, 56, 61);
     box-shadow: 0 20px 36px 20px rgba(0,0,0,.65);
     border-width: 0px;
+}
+.space-top {
+    margin-top: 50px;
+}
+ul.stations {
+    list-style: none;
+}
+.station-name {
+    margin: 10px;
+}
+ul.stations a {
+    color: rgba(95, 87, 134, 0.88);
 }
