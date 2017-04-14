@@ -9,6 +9,7 @@ $(document).ready(function() {
     var stationList = {};
     var selectedStationList = [];
     var selectedCity = "";
+    var previousBg = 1;
 
     var trigger = $('.hamburger'),
         overlay = $('.overlay'),
@@ -45,6 +46,17 @@ $(document).ready(function() {
         playSelectedStation($(this).attr('data-id'));
     });
 
+    $(document).on('click', '.volume-ctrl', function() {
+        var muted = $("#audio-src").prop('muted');
+        $("#audio-src").prop('muted', !muted);
+
+        if(!muted) {
+            $(this).text("Muted");
+        } else {
+            $(this).text("Playing..");
+        }
+    });
+
     $.ajax({
         url : liveRadioListUrl
     }).done(function(res) {
@@ -55,6 +67,28 @@ $(document).ready(function() {
         console.log(stationList);
         renderStationList();
     });
+
+    $('.dummy-bg').css("opacity", "1");
+    setTimeout(function () {
+        changeBg();
+        $('.dummy-bg').css("opacity", "");
+    }, 1000);
+
+    function changeBg() {
+        var rand = getRandomInt(1, 8);
+        if(rand == previousBg) {
+            rand++;
+        }
+        if(rand > 8) {
+            rand = 1;
+        }
+        $('.bg-img').removeClass('bg-' + previousBg).addClass("bg-" + rand);
+        previousBg = rand;
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     function renderStationList(area) {
         if(!area) {
@@ -121,6 +155,8 @@ $(document).ready(function() {
 
         document.title = "Online Radio - " + x.name;
         window.history.pushState('Online Radio', document.title, "#/" + selectedCity + "/" + x.id);
+
+        changeBg();
 
         // <video controls="" autoplay="" name="media"><source src="http://192.240.97.69:9201/stream" type="audio/mpeg"></video>
     }
