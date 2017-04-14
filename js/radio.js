@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     var stationList = {};
     var selectedStationList = [];
+    var selectedCity = "";
 
     var trigger = $('.hamburger'),
         overlay = $('.overlay'),
@@ -52,12 +53,22 @@ $(document).ready(function() {
         stationList['chennai'] = res.slice(17, res.length);
 
         console.log(stationList);
-        renderStationList('chennai');
+        renderStationList();
     });
 
     function renderStationList(area) {
+        if(!area) {
+            // read from cookie
+            area = getCookie('area');
+            if(!area)
+                area = 'chennai';
+        }
+
+        createCookie("area", area);
+
         var stations = $(".stations");
         var list = stationList[area] || [];
+        selectedCity = area;
         selectedStationList = list;
 
         stations.html("");
@@ -67,10 +78,19 @@ $(document).ready(function() {
             stations.append('<li><a data-id="' + obj.id + '"><h3>' + obj.name + '</h3></a></li>');
         }
 
-        playSelectedStation(0);
+        playSelectedStation();
     }
 
     function playSelectedStation(stationId) {
+        if(!stationId) {
+            // read from cookie
+            stationId = getCookie('stationId');
+            if(!stationId)
+                stationId = 0;
+        }
+
+        createCookie("stationId", stationId);
+
         var x;
         for (var i = 0; i < selectedStationList.length; i++) {
             if(stationId == selectedStationList[i].id){
@@ -86,5 +106,29 @@ $(document).ready(function() {
 
         $('.station-name').text(x.name);
         $('.station-site').attr("href", x.website);
+
+        window.history.pushState('page2', 'Title', "/" + selectedCity + "/" + x.id);
+    }
+
+    // Read cookie
+    function getCookie (name) {
+        var cookies = {};
+        var c = document.cookie.split('; ');
+        for (i = c.length - 1; i >= 0; i--) {
+            var C = c[i].split('=');
+            cookies[C[0]] = C[1];
+        }
+        return cookies[name] || null;
+    };
+
+    // create cookie
+    function createCookie (name, value, minutes) {
+        if(!minutes)
+            minutes = 60 * 24;
+
+        var date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+        document.cookie = name + "=" + value + expires + "; path=/";
     }
 });
