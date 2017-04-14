@@ -104,10 +104,24 @@ $(document).ready(function() {
         
         console.log(x)
 
+        var stream = x.src;
+
         $('.station-name').text(x.name);
         $('.station-site').attr("href", x.website);
+        var video = document.getElementById('audio-src');
+        video.innerHTML = '';
+        video.pause();
 
-        window.history.pushState('page2', 'Title', "/" + selectedCity + "/" + x.id);
+        var source = document.createElement('source');
+        source.setAttribute('src', stream);
+        video.appendChild(source);
+        video.load();
+        video.play();
+
+        document.title = "Online Radio - " + x.name;
+        window.history.pushState('Online Radio', document.title, "#/" + selectedCity + "/" + x.id);
+
+        // <video controls="" autoplay="" name="media"><source src="http://192.240.97.69:9201/stream" type="audio/mpeg"></video>
     }
 
     // Read cookie
