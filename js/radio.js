@@ -85,8 +85,9 @@ $(document).ready(function() {
         if(!stationId) {
             // read from cookie
             stationId = getCookie('stationId');
-            if(!stationId)
-                stationId = 0;
+            if(!stationId) {
+                stationId = selectedStationList[0].id;
+            }
         }
 
         createCookie("stationId", stationId);
