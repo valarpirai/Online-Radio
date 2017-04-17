@@ -129,7 +129,9 @@ $(document).ready(function() {
             stations.append('<li><a data-id="' + obj.id + '"><h3>' + obj.name + '</h3></a></li>');
         }
 
-        playSelectedStation();
+        setTimeout(function () {
+            playSelectedStation();
+        }, 200);
     }
 
     function playSelectedStation(stationId) {
