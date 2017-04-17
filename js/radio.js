@@ -94,7 +94,7 @@ $(document).ready(function() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function renderCityList(area) {
+    function renderCityList() {
         
         var city = $(".city");
         var list = Object.keys(stationList) || [];
@@ -105,8 +105,6 @@ $(document).ready(function() {
             var obj = list[i];
             city.append('<li><a data-city="' + obj + '">' + obj + '</a></li>');
         }
-
-        playSelectedStation();
     }
 
     function renderStationList(area) {
@@ -114,7 +112,7 @@ $(document).ready(function() {
             // read from cookie
             area = getCookie('area');
             if(!area)
-                area = 'chennai';
+                area = Object.keys(stationList)[0];
         }
 
         createCookie("area", area);
