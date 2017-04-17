@@ -336,3 +336,6 @@ ul.stations a {
     background: url(../img/8.jpg) no-repeat center center fixed; 
 }
 
+#wrapper button.hamburger > span {
+  background-color: white;
+}

@@ -38,7 +38,7 @@ $(document).ready(function() {
         $('#wrapper').toggleClass('toggled');
     });
 
-    $('[data-city]').click(function() {
+    $(document).on('click', '[data-city]', function() {
         renderStationList($(this).attr('data-city'));
     });
 
@@ -57,14 +57,18 @@ $(document).ready(function() {
         }
     });
 
+    // Download Station List data
     $.ajax({
         url : liveRadioListUrl
     }).done(function(res) {
         res = JSON.parse(res);
-        stationList['columbo'] = res.slice(0, 17);
-        stationList['chennai'] = res.slice(17, res.length);
+        
+        for(var i in res) {
+            stationList[res[i].name] = res[i];
+        }
 
         console.log(stationList);
+        renderCityList();
         renderStationList();
     });
 
@@ -90,6 +94,21 @@ $(document).ready(function() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function renderCityList(area) {
+        
+        var city = $(".city");
+        var list = Object.keys(stationList) || [];
+        
+        city.html("");
+
+        for (var i = 0; i < list.length; i++) {
+            var obj = list[i];
+            city.append('<li><a data-city="' + obj + '">' + obj + '</a></li>');
+        }
+
+        playSelectedStation();
+    }
+
     function renderStationList(area) {
         if(!area) {
             // read from cookie
@@ -101,7 +120,7 @@ $(document).ready(function() {
         createCookie("area", area);
 
         var stations = $(".stations");
-        var list = stationList[area] || [];
+        var list = (stationList[area] && stationList[area].channels) || [];
         selectedCity = area;
         selectedStationList = list;
 
