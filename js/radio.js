@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    'use strict';
 
     var liveRadioListUrl = "https://gist.githubusercontent.com/valarpirai/473305f09f8433f1d338634ed42c437d/raw/live-radio.json";
 
@@ -15,24 +16,12 @@ $(document).ready(function() {
         overlay = $('.overlay'),
         isClosed = false;
 
+    // ========================================================================
+    // Event Listeners
+    // ========================================================================
     trigger.click(function() {
         hamburger_cross();
     });
-
-    function hamburger_cross() {
-
-        if (isClosed == true) {
-            overlay.hide();
-            trigger.removeClass('is-open');
-            trigger.addClass('is-closed');
-            isClosed = false;
-        } else {
-            overlay.show();
-            trigger.removeClass('is-closed');
-            trigger.addClass('is-open');
-            isClosed = true;
-        }
-    }
 
     $('[data-toggle="offcanvas"]').click(function() {
         $('#wrapper').toggleClass('toggled');
@@ -57,7 +46,24 @@ $(document).ready(function() {
         }
     });
 
+    function hamburger_cross() {
+
+        if (isClosed == true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    // ========================================================================
     // Download Station List data
+    // ========================================================================
     $.ajax({
         url : liveRadioListUrl
     }).done(function(res) {
@@ -71,7 +77,11 @@ $(document).ready(function() {
         renderCityList();
         renderStationList();
     });
+    // ========================================================================
 
+    // ========================================================================
+    // Background Image change
+    // ========================================================================
     $('.dummy-bg').css("opacity", "1");
     setTimeout(function () {
         changeBg();
@@ -94,6 +104,9 @@ $(document).ready(function() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    // ========================================================================
+    // Render City and Station list
+    // ========================================================================
     function renderCityList() {
         
         var city = $(".city");
@@ -110,12 +123,12 @@ $(document).ready(function() {
     function renderStationList(area) {
         if(!area) {
             // read from cookie
-            area = getCookie('area');
+            area = cookie.get('area');
             if(!area)
                 area = Object.keys(stationList)[0];
         }
 
-        createCookie("area", area);
+        cookie.set("area", area);
 
         var stations = $(".stations");
         var list = (stationList[area] && stationList[area].channels) || [];
@@ -134,16 +147,19 @@ $(document).ready(function() {
         }, 200);
     }
 
+    // ========================================================================
+    // Play selected station
+    // ========================================================================
     function playSelectedStation(stationId) {
         if(!stationId) {
             // read from cookie
-            stationId = getCookie('stationId');
+            stationId = cookie.get('stationId');
             if(!stationId) {
                 stationId = selectedStationList[0].id;
             }
         }
 
-        createCookie("stationId", stationId);
+        cookie.set("stationId", stationId);
 
         var x;
         for (var i = 0; i < selectedStationList.length; i++) {
@@ -180,25 +196,31 @@ $(document).ready(function() {
         // <video controls="" autoplay="" name="media"><source src="http://192.240.97.69:9201/stream" type="audio/mpeg"></video>
     }
 
-    // Read cookie
-    function getCookie (name) {
-        var cookies = {};
-        var c = document.cookie.split('; ');
-        for (i = c.length - 1; i >= 0; i--) {
-            var C = c[i].split('=');
-            cookies[C[0]] = C[1];
+    // ========================================================================
+    // Cookie Utility
+    // ========================================================================
+    var cookie = {
+        // Read cookie
+        get : function getCookie (name) {
+            var cookies = {};
+            var c = document.cookie.split('; ');
+            for (var i = c.length - 1; i >= 0; i--) {
+                var C = c[i].split('=');
+                cookies[C[0]] = C[1];
+            }
+            return cookies[name] || null;
+        },
+
+        // create cookie
+        set : function createCookie (name, value, minutes) {
+            if(!minutes)
+                minutes = 60 * 24;
+
+            var date = new Date();
+            date.setTime(date.getTime() + (minutes * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+            document.cookie = name + "=" + value + expires + "; path=/";
         }
-        return cookies[name] || null;
     };
 
-    // create cookie
-    function createCookie (name, value, minutes) {
-        if(!minutes)
-            minutes = 60 * 24;
-
-        var date = new Date();
-        date.setTime(date.getTime() + (minutes * 60 * 1000));
-        var expires = "; expires=" + date.toGMTString();
-        document.cookie = name + "=" + value + expires + "; path=/";
-    }
 });
