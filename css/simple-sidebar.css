@@ -272,7 +272,7 @@
     z-index: 1;
 }
 
-.navbar-inverse {
+.navbar-fixed-bottom {
     background-color: rgb(54, 56, 61);
     box-shadow: 0 20px 36px 20px rgba(0,0,0,.65);
     border-width: 0px;
@@ -340,13 +340,21 @@ ul.stations a {
   background-color: white;
 }
 
-.navbar.navbar-inverse {
+.navbar-fixed-bottom {
   height: 76px;
+}
+
+.navbar-fixed-bottom .nav>li>a,
+.navbar-fixed-bottom .nav>li>a:focus,
+.navbar-fixed-bottom .nav>li>a:hover {
+  background-color: transparent;
+  color: white;
 }
 
 .volume-ctrl {
   background-image: url(../img/player-sprite.png);
   margin: 20px;
+  padding: 16px;
 }
 .volume-ctrl.play {
   background-position: 0 85px;
@@ -355,3 +363,15 @@ ul.stations a {
   background-position: -30px 85px;
 }
 
+@media only screen and (max-width: 500px) {
+  .navbar-fixed-bottom .nav>li a,
+  .navbar-fixed-bottom .nav>li h3,
+  .navbar-fixed-bottom .nav>li {
+    display: inline-block;
+    vertical-align: bottom;
+    color: white;
+  }
+  .navbar-fixed-bottom .nav>li a {
+    padding: 16px;
+  }
+}
