@@ -23,6 +23,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '[data-city]', function() {
+        trigger.click();
         renderStationList($(this).attr('data-city'));
     });
 
@@ -35,9 +36,9 @@ $(document).ready(function() {
         $("#audio-src").prop('muted', !muted);
 
         if(!muted) {
-            $(this).text("Muted");
+            $(this).addClass("play").removeClass("pause");
         } else {
-            $(this).text("Playing..");
+            $(this).addClass("pause").removeClass("play");
         }
     });
 

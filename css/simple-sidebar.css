@@ -343,3 +343,15 @@ ul.stations a {
 .navbar.navbar-inverse {
   height: 76px;
 }
+
+.volume-ctrl {
+  background-image: url(../img/player-sprite.png);
+  margin: 20px;
+}
+.volume-ctrl.play {
+  background-position: 0 85px;
+}
+.volume-ctrl.pause {
+  background-position: -30px 85px;
+}
+
