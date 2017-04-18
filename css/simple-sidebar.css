@@ -339,3 +339,7 @@ ul.stations a {
 #wrapper button.hamburger > span {
   background-color: white;
 }
+
+.navbar.navbar-inverse {
+  height: 76px;
+}

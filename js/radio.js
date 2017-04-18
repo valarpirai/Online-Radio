@@ -3,17 +3,12 @@ $(document).ready(function() {
 
     var liveRadioListUrl = "https://gist.githubusercontent.com/valarpirai/473305f09f8433f1d338634ed42c437d/raw/live-radio.json";
 
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var audioContext = new AudioContext(); // Audio context
-    var audioSource;
-
     var stationList = {};
     var selectedStationList = [];
     var selectedCity = "";
     var previousBg = 1;
 
     var trigger = $('.hamburger'),
-        overlay = $('.overlay'),
         isClosed = false;
 
     // ========================================================================
@@ -49,35 +44,15 @@ $(document).ready(function() {
     function hamburger_cross() {
 
         if (isClosed == true) {
-            overlay.hide();
             trigger.removeClass('is-open');
             trigger.addClass('is-closed');
             isClosed = false;
         } else {
-            overlay.show();
             trigger.removeClass('is-closed');
             trigger.addClass('is-open');
             isClosed = true;
         }
     }
-
-    // ========================================================================
-    // Download Station List data
-    // ========================================================================
-    $.ajax({
-        url : liveRadioListUrl
-    }).done(function(res) {
-        res = JSON.parse(res);
-        
-        for(var i in res) {
-            stationList[res[i].name] = res[i];
-        }
-
-        console.log(stationList);
-        renderCityList();
-        renderStationList();
-    });
-    // ========================================================================
 
     // ========================================================================
     // Background Image change
@@ -141,10 +116,6 @@ $(document).ready(function() {
             var obj = list[i];
             stations.append('<li><a data-id="' + obj.id + '"><h3>' + obj.name + '</h3></a></li>');
         }
-
-        setTimeout(function () {
-            playSelectedStation();
-        }, 200);
     }
 
     // ========================================================================
@@ -222,5 +193,27 @@ $(document).ready(function() {
             document.cookie = name + "=" + value + expires + "; path=/";
         }
     };
+
+    // ========================================================================
+    // Download Station List data
+    // ========================================================================
+    $.ajax({
+        url : liveRadioListUrl
+    }).done(function(res) {
+        res = JSON.parse(res);
+        
+        for(var i in res) {
+            stationList[res[i].name] = res[i];
+        }
+
+        console.log(stationList);
+        renderCityList();
+        renderStationList();
+
+        setTimeout(function () {
+            playSelectedStation();
+        }, 200);
+    });
+    // ========================================================================
 
 });
