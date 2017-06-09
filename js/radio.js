@@ -65,11 +65,11 @@ $(document).ready(function() {
     }, 1000);
 
     function changeBg() {
-        var rand = getRandomInt(1, 8);
+        var rand = getRandomInt(1, 15);
         if(rand == previousBg) {
             rand++;
         }
-        if(rand > 8) {
+        if(rand > 15) {
             rand = 1;
         }
         $('.bg-img').removeClass('bg-' + previousBg).addClass("bg-" + rand);

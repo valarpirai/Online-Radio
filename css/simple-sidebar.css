@@ -335,6 +335,28 @@ ul.stations a {
 .bg-8 {
     background: url(../img/8.jpg) no-repeat center center fixed; 
 }
+.bg-9 {
+    background: url(../img/9.jpg) no-repeat center center fixed; 
+}
+.bg-10 {
+    background: url(../img/10.jpg) no-repeat center center fixed; 
+}
+.bg-11 {
+    background: url(../img/11.jpg) no-repeat center center fixed; 
+}
+.bg-12 {
+    background: url(../img/12.jpg) no-repeat center center fixed; 
+}
+.bg-13 {
+    background: url(../img/13.jpg) no-repeat center center fixed; 
+}
+.bg-14 {
+    background: url(../img/14.jpg) no-repeat center center fixed; 
+}
+.bg-15 {
+    background: url(../img/15.jpg) no-repeat center center fixed; 
+}
+
 
 #wrapper button.hamburger > span {
   background-color: white;
