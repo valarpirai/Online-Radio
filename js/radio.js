@@ -73,7 +73,7 @@ $(document).ready(function() {
         if(rand > maxNumberofBg) {
             rand = 1;
         }
-        var url = '.bg-img { background: url("/img/' + rand + '.jpg") no-repeat center center fixed; }';
+        var url = '.bg-img { background: url("img/' + rand + '.jpg") no-repeat center center fixed; }';
         $('#bg-image').text(url);
         previousBg = rand;
     }
