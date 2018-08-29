@@ -7,6 +7,7 @@ $(document).ready(function() {
     var selectedStationList = [];
     var selectedCity = "";
     var previousBg = 1;
+    var maxNumberofBg = 24;
 
     var trigger = $('.hamburger'),
         isClosed = false;
@@ -65,14 +66,15 @@ $(document).ready(function() {
     }, 1000);
 
     function changeBg() {
-        var rand = getRandomInt(1, 15);
+        var rand = getRandomInt(1, maxNumberofBg);
         if(rand == previousBg) {
             rand++;
         }
-        if(rand > 15) {
+        if(rand > maxNumberofBg) {
             rand = 1;
         }
-        $('.bg-img').removeClass('bg-' + previousBg).addClass("bg-" + rand);
+        var url = '.bg-img { background: url("/img/' + rand + '.jpg") no-repeat center center fixed; }';
+        $('#bg-image').text(url);
         previousBg = rand;
     }
 
@@ -160,6 +162,10 @@ $(document).ready(function() {
         video.load();
         video.play();
 
+        video.onloadedmetadata = function (e) {
+            console.log(video.audioTracks);
+        };
+
         document.title = "Online Radio - " + x.name;
         window.history.pushState('Online Radio', document.title, "#/" + selectedCity + "/" + x.id);
 
@@ -218,3 +224,5 @@ $(document).ready(function() {
     // ========================================================================
 
 });
+
+// onloadedmetadata

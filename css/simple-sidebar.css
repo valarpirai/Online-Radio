@@ -311,52 +311,6 @@ ul.stations a {
     background: rgb(62, 45, 42);
     opacity: 0.37;
 }
-.bg-1 {
-    background: url(../img/1.jpg) no-repeat center center fixed; 
-}
-.bg-2 {
-    background: url(../img/2.jpg) no-repeat center center fixed; 
-}
-.bg-3 {
-    background: url(../img/3.jpg) no-repeat center center fixed; 
-}
-.bg-4 {
-    background: url(../img/4.jpg) no-repeat center center fixed; 
-}
-.bg-5 {
-    background: url(../img/5.jpg) no-repeat center center fixed; 
-}
-.bg-6 {
-    background: url(../img/6.jpg) no-repeat center center fixed; 
-}
-.bg-7 {
-    background: url(../img/7.jpg) no-repeat center center fixed; 
-}
-.bg-8 {
-    background: url(../img/8.jpg) no-repeat center center fixed; 
-}
-.bg-9 {
-    background: url(../img/9.jpg) no-repeat center center fixed; 
-}
-.bg-10 {
-    background: url(../img/10.jpg) no-repeat center center fixed; 
-}
-.bg-11 {
-    background: url(../img/11.jpg) no-repeat center center fixed; 
-}
-.bg-12 {
-    background: url(../img/12.jpg) no-repeat center center fixed; 
-}
-.bg-13 {
-    background: url(../img/13.jpg) no-repeat center center fixed; 
-}
-.bg-14 {
-    background: url(../img/14.jpg) no-repeat center center fixed; 
-}
-.bg-15 {
-    background: url(../img/15.jpg) no-repeat center center fixed; 
-}
-
 
 #wrapper button.hamburger > span {
   background-color: white;
