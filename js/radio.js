@@ -129,17 +129,23 @@ $(document).ready(function() {
             // read from cookie
             stationId = cookie.get('stationId');
             if(!stationId) {
-                stationId = selectedStationList[0].id;
+                let hash = location.hash.split('/');
+                stationId = hash[2] || selectedStationList[0].id;
             }
         }
 
         cookie.set("stationId", stationId);
 
         var x;
-        for (var i = 0; i < selectedStationList.length; i++) {
-            if(stationId == selectedStationList[i].id){
-                x = selectedStationList[i];
-                break;
+        for(let area in stationList) {
+            let channel_list = stationList[area].channels;
+            for (var i = 0; i < channel_list.length; i++) {
+                if(stationId == channel_list[i].id){
+                    x = channel_list[i];
+                    selectedStationList = channel_list;
+                    renderStationList(area);
+                    break;
+                }
             }
         }
 
@@ -160,10 +166,13 @@ $(document).ready(function() {
         source.setAttribute('src', stream);
         video.appendChild(source);
         video.load();
-        video.play();
 
-        video.onloadedmetadata = function (e) {
-            console.log(video.audioTracks);
+        video.onloadeddata = function (e) {
+            try{
+                video.play();
+            } catch(e) {
+                console.log(e)
+            }
         };
 
         document.title = "Online Radio - " + x.name;
